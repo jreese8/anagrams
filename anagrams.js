@@ -40,7 +40,11 @@ let getAnagrams = (word, anagram = '', anagrams = []) => { //permutations
         console.log(anagram, anagrams, "for loop");
     }
 
-    anagrams.push(anagrams);
+    var anagramResult = {
+      "anagrams": anagrams
+    }
+
+    anagrams.push(anagramResult);
     console.log(anagrams, "pushing");
 
     displayAnagrams(anagrams);
@@ -48,7 +52,9 @@ let getAnagrams = (word, anagram = '', anagrams = []) => { //permutations
 };
 
 var displayAnagrams = function(anagrams) {
-  anagramsEl.innerHTML= anagrams;
+  for (var i = 0; i < anagramsEl.length; i++) {
+  anagramsEl[i].innerHTML= `anagrams: ${anagrams[i]}`;
+  }
   console.log("display", anagrams);
 }
 

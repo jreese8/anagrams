@@ -1,48 +1,55 @@
 // take a string and return anagrams
 
-var anagramFormEl = document.querySelector("#anagram-form");
+var anagramsEl = document.querySelectorAll(".anagrams");
 
-var anagramInputEl = document.querySelector("#anagram");
+let anagramFormEl = document.querySelector("#anagram-form");
 
-var anagramSearch = document.querySelector("#anagram-search");
-
-let anagrams = [];
+let wordInputEl = document.querySelector("#word");
 
 // Input word for anagram
-
-var searchButton = function(event) {
+let searchButton = function(event) {
     event.preventDefault();
   
     // get value from input element
-    var anagramName = anagramInputEl.value.trim();
+    let word = wordInputEl.value.trim();
+    console.log(word, "typed word");
   
-    if (anagramName) {
-      getAnagrams();
-  
-      anagramInputEl.value = "";
+    if (word) {
+      getAnagrams(word);
+      console.log(word, "run the function");
 
     } else {
       alert("Please enter a valid word.");
     }
 };
 
-let getAnagrams = (word, anagramName) => {
+let getAnagrams = (word, anagram = '', anagrams = []) => { //permutations
+    console.log(word, anagram, "getting the anagrams");
     word = word.toUpperCase(); //makes lowercase letters = uppercase so there's no repeat amongst letters, giving an undefined error
-    if (!word) {
-        anagrams.push(anagramName);
+    if (anagram) {
+      console.log(word, anagram, "if anagram");
+        anagrams.push(anagram);
         return;
     }
 
     for (let i = 0; i < word.length; i++) {
         // concat current letter to anagram
-        anagramName += word[i];
-        getAnagrams(word.slice(0, i) + word.slice(i + 1), anagramName, anagrams); //wont include zero
-        anagramName = anagramName.slice(0, anagramName.length -1);
+        anagram += word[i];
+        getAnagrams(word.slice(0, i) + word.slice(i + 1), anagram, anagrams); //wont include zero
+        anagram = anagram.slice(0, anagram.length - 1);
+        console.log(anagram, anagrams, "for loop");
     }
 
-    anagramName.push(anagramResult);
-    var anagramResult = [anagrams]
+    anagrams.push(anagrams);
+    console.log(anagrams, "pushing");
+
+    displayAnagrams(anagrams);
+
 };
 
+var displayAnagrams = function(anagrams) {
+  anagramsEl.innerHTML= anagrams;
+  console.log("display", anagrams);
+}
 
 anagramFormEl.addEventListener("submit", searchButton);

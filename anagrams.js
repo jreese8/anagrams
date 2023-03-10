@@ -26,7 +26,7 @@ let searchButton = function(event) {
 let getAnagrams = (word, anagram = '', anagrams = []) => { //permutations
     console.log(word, anagram, "getting the anagrams");
     word = word.toUpperCase(); //makes lowercase letters = uppercase so there's no repeat amongst letters, giving an undefined error
-    if (anagram) {
+    if (!word) {
       console.log(word, anagram, "if anagram");
         anagrams.push(anagram);
         return;
@@ -40,11 +40,7 @@ let getAnagrams = (word, anagram = '', anagrams = []) => { //permutations
         console.log(anagram, anagrams, "for loop");
     }
 
-    var anagramResult = {
-      "anagrams": anagrams
-    }
-
-    anagrams.push(anagramResult);
+    anagrams.push(anagrams);
     console.log(anagrams, "pushing");
 
     displayAnagrams(anagrams);
@@ -53,7 +49,7 @@ let getAnagrams = (word, anagram = '', anagrams = []) => { //permutations
 
 var displayAnagrams = function(anagrams) {
   for (var i = 0; i < anagramsEl.length; i++) {
-  anagramsEl[i].innerHTML= `anagrams: ${anagrams[i]}`;
+  anagramsEl[i].innerHTML = `anagrams: ${anagrams}`;
   }
   console.log("display", anagrams);
 }

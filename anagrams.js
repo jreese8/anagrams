@@ -25,26 +25,32 @@ let searchButton = function(event) {
 
 let getAnagrams = (word, anagram = '', anagrams = []) => { //permutations
     console.log(word, anagram, "getting the anagrams");
-    word = word.toUpperCase(); //makes lowercase letters = uppercase so there's no repeat amongst letters, giving an undefined error
-    if (!word) {
+    word = word.toUpperCase(); //makes lowercase letters = uppercase so there's no repeat amongst letters, changing var to let fixed error
+    
+    if (anagram) {
       console.log(word, anagram, "if anagram");
-        anagrams.push(anagram);
+      anagrams.push(anagram);
+    }
+
+    if (!word) {
         return;
     }
 
     for (let i = 0; i < word.length; i++) {
         // concat current letter to anagram
         anagram += word[i];
-        getAnagrams(word.slice(0, i) + word.slice(i + 1), anagram, anagrams); //wont include zero
-        anagram = anagram.slice(0, anagram.length - 1);
+        //recurse over function
+        getAnagrams(word.slice(0, i) + word.slice(i + 1), anagram, anagrams); //slice word and pass the rest of it to anagram
+        anagram = anagram.slice(0, anagram.length - 1); //slices last leatter
         console.log(anagram, anagrams, "for loop");
     }
 
-    anagrams.push(anagrams);
+    let uniqueAna = [...new Set(anagrams)]; // This causes only new results to display, no repeat anagrams
+
+    uniqueAna.push(anagrams);
     console.log(anagrams, "pushing");
 
     displayAnagrams(anagrams);
-
 };
 
 var displayAnagrams = function(anagrams) {

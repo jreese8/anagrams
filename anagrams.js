@@ -29,7 +29,7 @@ let getAnagrams = (word, anagram = '', anagrams = []) => { //permutations
     
     if (anagram) {
       console.log(word, anagram, "if anagram");
-      anagrams.push(anagram);
+      anagrams.push(anagram); // allows for letters and shorter words to appear
     }
 
     if (!word) {
@@ -55,7 +55,7 @@ let getAnagrams = (word, anagram = '', anagrams = []) => { //permutations
 
 var displayAnagrams = function(anagrams) {
   for (var i = 0; i < anagramsEl.length; i++) {
-  anagramsEl[i].innerHTML = `anagrams: ${anagrams}`;
+  anagramsEl[i].innerHTML = `Anagrams: ${anagrams}`;
   }
   console.log("display", anagrams);
 }
